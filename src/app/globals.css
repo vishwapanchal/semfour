@@ -1,0 +1,419 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer base {
+  :root {
+    /* Raw HSL values for use in hsla() for glows */
+    --primary-raw-hsl: 210, 100%, 60%; /* Electric Blue */
+    --accent-raw-hsl: 320, 100%, 60%;  /* Hot Pink/Magenta */
+    --destructive-raw-hsl: 0, 90%, 65%;
+    --border-raw-hsl: 30, 40%, 50%; /* Warm Copper/Bronze */
+    --chart1-raw-hsl: 185, 100%, 50%; /* Neon Cyan */
+    --chart2-raw-hsl: 290, 100%, 65%; /* Neon Purple/Pink */
+    --chart3-raw-hsl: 120, 100%, 50%; /* Neon Green */
+    --chart4-raw-hsl: 45, 100%, 55%;  /* Neon Yellow/Orange */
+    --chart5-raw-hsl: 200, 100%, 70%; /* Bright Teal - Also used for BFS/Dijkstra Viz Path */
+
+    /* Role-specific accents */
+    --role-sensor-accent-hsl: 190, 90%, 60%; /* Bright Cyan-Blue */
+    --role-router-accent-hsl: 270, 90%, 65%; /* Vibrant Purple */
+    --role-gateway-accent-hsl: 40, 100%, 55%; /* Bright Orange-Yellow */
+
+    /* Dark Mode Base */
+    --background: 220 15% 10%; /* Deep Charcoal/Dark Desaturated Blue */
+    --foreground: 210 15% 90%; /* Light, slightly cool pastel */
+
+    /* Cards & Popovers - Darker base with pastel foregrounds */
+    --card: 220 15% 14%; /* Slightly lighter than main background */
+    --card-foreground: 210 20% 88%; /* Light pastel */
+    --popover: 220 15% 14%;
+    --popover-foreground: 210 20% 88%;
+
+    /* Vibrant Neon Accents */
+    --primary: var(--primary-raw-hsl);
+    --primary-foreground: 0 0% 98%; /* White */
+    --accent: var(--accent-raw-hsl);
+    --accent-foreground: 0 0% 98%; /* White */
+
+    /* Organic Tech Warmth & Muted Tones */
+    --secondary: 220 15% 18%; /* Darker subtle element background */
+    --secondary-foreground: 210 15% 75%;
+    --muted: 220 15% 12%; /* Even more subtle background */
+    --muted-foreground: 30 10% 65%; /* Desaturated warm metallic / light warm grey */
+    --border: var(--border-raw-hsl);
+    --input: var(--border-raw-hsl); /* Using border color for input borders */
+    --ring: var(--accent-raw-hsl); /* Neon accent for focus rings */
+
+    /* Destructive States */
+    --destructive: var(--destructive-raw-hsl);
+    --destructive-foreground: 0 0% 98%;
+
+    /* Chart Colors */
+    --chart-1: var(--chart1-raw-hsl);
+    --chart-2: var(--chart2-raw-hsl);
+    --chart-3: var(--chart3-raw-hsl);
+    --chart-4: var(--chart4-raw-hsl);
+    --chart-5: var(--chart5-raw-hsl);
+
+    /* Battery Colors (Neon) */
+    --battery-high-hsl: 130, 100%, 55%; /* Bright Neon Green */
+    --battery-medium-hsl: 50, 100%, 55%; /* Bright Neon Yellow/Orange */
+    --battery-low-hsl: 0, 100%, 60%;    /* Bright Neon Red */
+
+    --battery-high-color: hsl(var(--battery-high-hsl));
+    --battery-medium-color: hsl(var(--battery-medium-hsl));
+    --battery-low-color: hsl(var(--battery-low-hsl));
+
+    /* Sharper UI Elements */
+    --radius: 0.3rem;
+
+    /* Sidebar - mirrors main theme for consistency */
+    --sidebar-background: 220 15% 12%; /* Slightly distinct from main bg */
+    --sidebar-foreground: hsl(var(--foreground));
+    --sidebar-primary: hsl(var(--primary));
+    --sidebar-primary-foreground: hsl(var(--primary-foreground));
+    --sidebar-accent: hsl(var(--accent));
+    --sidebar-accent-foreground: hsl(var(--accent-foreground));
+    --sidebar-border: hsl(var(--border));
+    --sidebar-ring: hsl(var(--ring));
+
+    /* Resizable Panel Handle */
+    --panel-handle-background: hsl(var(--border-raw-hsl), 0.5); /* Semi-transparent border color */
+    --panel-handle-background-hover: hsl(var(--accent-raw-hsl), 0.7); /* Accent color on hover */
+
+  }
+
+  .dark {
+    --primary-raw-hsl: 210, 100%, 60%;
+    --accent-raw-hsl: 320, 100%, 60%;
+    --destructive-raw-hsl: 0, 90%, 65%;
+    --border-raw-hsl: 30, 40%, 50%;
+    --chart1-raw-hsl: 185, 100%, 50%;
+    --chart2-raw-hsl: 290, 100%, 65%;
+    --chart3-raw-hsl: 120, 100%, 50%;
+    --chart4-raw-hsl: 45, 100%, 55%;
+    --chart5-raw-hsl: 200, 100%, 70%;
+
+    /* Role-specific accents */
+    --role-sensor-accent-hsl: 190, 90%, 60%;
+    --role-router-accent-hsl: 270, 90%, 65%;
+    --role-gateway-accent-hsl: 40, 100%, 55%;
+
+    --background: 220 15% 10%;
+    --foreground: 210 15% 90%;
+    --card: 220 15% 14%;
+    --card-foreground: 210 20% 88%;
+    --popover: 220 15% 14%;
+    --popover-foreground: 210 20% 88%;
+    --primary: var(--primary-raw-hsl);
+    --primary-foreground: 0 0% 98%;
+    --accent: var(--accent-raw-hsl);
+    --accent-foreground: 0 0% 98%;
+    --secondary: 220 15% 18%;
+    --secondary-foreground: 210 15% 75%;
+    --muted: 220 15% 12%;
+    --muted-foreground: 30 10% 65%;
+    --border: var(--border-raw-hsl);
+    --input: var(--border-raw-hsl);
+    --ring: var(--accent-raw-hsl);
+    --destructive: var(--destructive-raw-hsl);
+    --destructive-foreground: 0 0% 98%;
+
+    --chart-1: var(--chart1-raw-hsl);
+    --chart-2: var(--chart2-raw-hsl);
+    --chart-3: var(--chart3-raw-hsl);
+    --chart-4: var(--chart4-raw-hsl);
+    --chart-5: var(--chart5-raw-hsl);
+
+    --battery-high-hsl: 130, 100%, 55%;
+    --battery-medium-hsl: 50, 100%, 55%;
+    --battery-low-hsl: 0, 100%, 60%;
+
+    --battery-high-color: hsl(var(--battery-high-hsl));
+    --battery-medium-color: hsl(var(--battery-medium-hsl));
+    --battery-low-color: hsl(var(--battery-low-hsl));
+
+    --sidebar-background: 220 15% 12%;
+    --sidebar-foreground: hsl(var(--foreground));
+    --sidebar-primary: hsl(var(--primary));
+    --sidebar-primary-foreground: hsl(var(--primary-foreground));
+    --sidebar-accent: hsl(var(--accent));
+    --sidebar-accent-foreground: hsl(var(--accent-foreground));
+    --sidebar-border: hsl(var(--border));
+    --sidebar-ring: hsl(var(--ring));
+
+    --panel-handle-background: hsl(var(--border-raw-hsl), 0.5);
+    --panel-handle-background-hover: hsl(var(--accent-raw-hsl), 0.7);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Text Glow Utilities - Reduced Intensity */
+.text-glow-primary {
+  color: hsl(var(--primary));
+  text-shadow:
+    0 0 2px hsla(var(--primary-raw-hsl), 0.7), /* Reduced blur and opacity */
+    0 0 5px hsla(var(--primary-raw-hsl), 0.5),
+    0 0 8px hsla(var(--primary-raw-hsl), 0.3);
+}
+
+.text-glow-accent {
+  color: hsl(var(--accent));
+  text-shadow:
+    0 0 2px hsla(var(--accent-raw-hsl), 0.7), /* Reduced blur and opacity */
+    0 0 5px hsla(var(--accent-raw-hsl), 0.5),
+    0 0 8px hsla(var(--accent-raw-hsl), 0.3);
+}
+
+/* Battery Text Color Utilities */
+.text-battery-high {
+  color: var(--battery-high-color);
+  text-shadow: 0 0 5px hsla(var(--battery-high-hsl), 0.7);
+}
+.text-battery-medium {
+  color: var(--battery-medium-color);
+  text-shadow: 0 0 5px hsla(var(--battery-medium-hsl), 0.7);
+}
+.text-battery-low {
+  color: var(--battery-low-color);
+  text-shadow: 0 0 5px hsla(var(--battery-low-hsl), 0.7);
+}
+
+/* ReactFlow specific styles */
+.react-flow__node {
+  @apply bg-card text-card-foreground rounded-md shadow-md text-center p-0; /* Adjusted padding to 0 for internal bar */
+  border: 1px solid hsl(var(--accent)); /* Metallic border */
+  box-shadow: 0 0 6px hsla(var(--accent-raw-hsl), 0.5), 0 0 10px hsla(var(--accent-raw-hsl), 0.3); /* Neon glow */
+  min-width: 80px;
+}
+
+.react-flow__node.selected:not(.bfs-viz-processing):not(.bfs-viz-inQueue):not(.bfs-viz-processed):not(.bfs-viz-finalPath):not(.dijkstra-processing):not(.dijkstra-tentative):not(.dijkstra-finalized):not(.dijkstra-finalPath) {
+  border: 2px solid hsl(var(--primary)); /* Brighter neon border when selected */
+  box-shadow: 0 0 8px hsla(var(--primary-raw-hsl), 0.7), 0 0 15px hsla(var(--primary-raw-hsl), 0.5);
+}
+
+
+/* BFS Visualization Styles for Nodes */
+.react-flow__node.bfs-viz-processing {
+  border-color: theme('colors.blue.400');
+  box-shadow: 0 0 8px theme('colors.blue.400 / 70%'), 0 0 15px theme('colors.blue.400 / 50%');
+}
+.react-flow__node.bfs-viz-inQueue {
+  border-color: theme('colors.yellow.400');
+   box-shadow: 0 0 6px theme('colors.yellow.400 / 50%');
+}
+.react-flow__node.bfs-viz-processed {
+  border-color: theme('colors.green.400');
+  opacity: 0.85;
+}
+.react-flow__node.bfs-viz-finalPath { /* Shared with Dijkstra */
+  border-color: hsl(var(--chart5-raw-hsl));
+  box-shadow: 0 0 8px hsla(var(--chart5-raw-hsl), 0.7), 0 0 15px hsla(var(--chart5-raw-hsl), 0.5);
+}
+
+/* Dijkstra Visualization Styles for Nodes */
+.react-flow__node.dijkstra-processing {
+  border-color: theme('colors.purple.400');
+  box-shadow: 0 0 8px theme('colors.purple.400 / 70%'), 0 0 15px theme('colors.purple.400 / 50%');
+}
+.react-flow__node.dijkstra-tentative {
+  border-color: theme('colors.orange.400');
+   box-shadow: 0 0 6px theme('colors.orange.400 / 50%');
+}
+.react-flow__node.dijkstra-finalized {
+  border-color: theme('colors.teal.400');
+  opacity: 0.85;
+}
+.react-flow__node.dijkstra-finalPath { /* Shared with BFS */
+  border-color: hsl(var(--chart5-raw-hsl));
+  box-shadow: 0 0 8px hsla(var(--chart5-raw-hsl), 0.7), 0 0 15px hsla(var(--chart5-raw-hsl), 0.5);
+}
+
+
+.react-flow__edge-path {
+  stroke: hsl(var(--primary));
+  stroke-width: 2px;
+  filter: drop-shadow(0 0 2px hsla(var(--primary-raw-hsl), 0.7)) drop-shadow(0 0 4px hsla(var(--primary-raw-hsl), 0.5));
+}
+
+.react-flow__edge.selected-edge .react-flow__edge-path, /* For manual selection */
+.react-flow__edge:hover .react-flow__edge-path {
+  stroke: hsl(var(--accent));
+  stroke-width: 2.5px; /* Slightly thicker */
+  filter: drop-shadow(0 0 3px hsla(var(--accent-raw-hsl), 0.8)) drop-shadow(0 0 6px hsla(var(--accent-raw-hsl), 0.6));
+}
+
+/* General style for paths highlighted by simulation (non-visualization) */
+.react-flow__edge.general-visualized-path .react-flow__edge-path {
+  stroke: hsl(var(--accent)) !important; 
+  stroke-width: 3px !important;
+  filter: drop-shadow(0 0 4px hsla(var(--accent-raw-hsl), 0.8)) drop-shadow(0 0 8px hsla(var(--accent-raw-hsl), 0.6));
+}
+
+
+/* Style for edges part of BFS visualized path */
+.react-flow__edge.bfs-visualized-path .react-flow__edge-path {
+  stroke: hsl(var(--chart-5)) !important; 
+  stroke-width: 3px !important;
+  filter: drop-shadow(0 0 4px hsla(var(--chart5-raw-hsl), 0.8)) drop-shadow(0 0 8px hsla(var(--chart5-raw-hsl), 0.6));
+}
+
+/* Style for edges part of Dijkstra visualized path */
+.react-flow__edge.dijkstra-visualized-path .react-flow__edge-path {
+  stroke: hsl(var(--chart-5)) !important; /* Using chart-5 for consistency */
+  stroke-width: 3px !important;
+  filter: drop-shadow(0 0 4px hsla(var(--chart5-raw-hsl), 0.8)) drop-shadow(0 0 8px hsla(var(--chart5-raw-hsl), 0.6));
+}
+.react-flow__edge.dijkstra-relaxed-edge .react-flow__edge-path {
+  stroke: hsl(var(--chart-2)) !important; /* Using chart-2 for relaxing edge */
+  stroke-width: 2.5px !important;
+  filter: drop-shadow(0 0 3px hsla(var(--chart2-raw-hsl), 0.7)) drop-shadow(0 0 6px hsla(var(--chart2-raw-hsl), 0.5));
+}
+
+
+.react-flow__handle {
+  @apply w-2 h-2 rounded-full border-2;
+  background-color: hsl(var(--muted)); /* Muted handle */
+  border-color: hsl(var(--background)); /* Contrast with node background */
+}
+.react-flow__handle:hover {
+  background-color: hsl(var(--accent));
+}
+
+.react-flow__attribution {
+    @apply hidden; /* Hide ReactFlow attribution */
+}
+
+/* Ensure chart tooltips and legends fit the dark theme */
+.recharts-tooltip-wrapper {
+  background-color: hsla(var(--card), 0.9) !important;
+  border: 1px solid hsl(var(--border)) !important;
+  color: hsl(var(--card-foreground)) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: 0 2px 10px hsla(var(--background), 0.5) !important;
+}
+.recharts-tooltip-item {
+  color: hsl(var(--card-foreground)) !important;
+}
+.recharts-legend-item {
+  color: hsl(var(--foreground)) !important;
+}
+
+/* Underline animation for tagline */
+.underline-animate {
+  position: relative;
+  display: inline-block; /* Or block, depending on desired layout with siblings */
+}
+
+.underline-animate::after {
+  content: '';
+  position: absolute;
+  height: 2px; /* Underline thickness */
+  bottom: -4px; /* Distance from text */
+  background-color: hsl(var(--accent-raw-hsl)); /* Color of the underline */
+
+  /* Initial state matching 0% of keyframes for smooth start after delay */
+  left: 0%;
+  width: 0%;
+  right: auto;
+
+  animation-name: draw-underline; 
+  animation-duration: 3s; 
+  animation-timing-function: ease-in-out;
+  animation-delay: 0.5s; 
+  animation-iteration-count: infinite;
+}
+
+@keyframes draw-underline {
+  /* LTR Draw */
+  0% {
+    left: 0%;
+    width: 0%;
+    right: auto;
+  }
+  40% { /* LTR Drawn fully */
+    left: 0%;
+    width: 100%;
+    right: auto;
+  }
+
+  /* Transition from LTR full to RTL empty */
+  /* During this 10% (40% to 50%), width goes from 100% to 0% */
+  /* and anchor point effectively switches */
+  50% {
+    right: 0%;
+    width: 0%;
+    left: auto;
+  }
+
+  /* RTL Draw */
+  /* Starts immediately after transition */
+  90% { /* RTL Drawn fully */
+    right: 0%;
+    width: 100%;
+    left: auto;
+  }
+
+  /* Transition from RTL full to LTR empty */
+  /* During this 10% (90% to 100%), width goes from 100% to 0% */
+  /* and anchor point effectively switches */
+  100% {
+    left: 0%;
+    width: 0%;
+    right: auto;
+  }
+}
+
+
+/* Styles for react-resizable-panels handle */
+[data-panel-resize-handle-id] {
+  width: 100% !important; /* Override inline width for horizontal group */
+  height: 8px !important; /* Thicker handle for easier grabbing */
+  background-color: transparent;
+  position: relative;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+[data-panel-group-direction="vertical"] > [data-panel-resize-handle-id] {
+    margin-top: -4px; /* Half of height to center */
+    margin-bottom: -4px; /* Half of height to center */
+}
+
+[data-panel-resize-handle-id]::before {
+  content: "";
+  display: block;
+  width: 50px; /* Width of the visible drag indicator */
+  height: 4px; /* Thickness of the drag indicator */
+  background-color: var(--panel-handle-background);
+  border-radius: 2px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+[data-panel-resize-handle-id]:hover::before,
+[data-panel-resize-handle-id][data-resize-handle-state="drag"]::before {
+  background-color: var(--panel-handle-background-hover);
+}
+
+/* Styles for selected edge when not part of a visualization */
+.react-flow__edge.selected-edge .react-flow__edge-path {
+  stroke: hsl(var(--accent)) !important;
+  stroke-width: 2.5px !important;
+  filter: drop-shadow(0 0 3px hsla(var(--accent-raw-hsl), 0.8)) drop-shadow(0 0 6px hsla(var(--accent-raw-hsl), 0.6));
+}

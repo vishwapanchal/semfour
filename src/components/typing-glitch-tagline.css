@@ -1,0 +1,67 @@
+.typing-cursor {
+  display: inline-block;
+  animation: blink 0.7s infinite;
+  margin-left: 2px;
+  color: hsl(var(--accent)); /* Use accent color for cursor */
+  /* Ensure cursor is not affected by glitch pseudo-elements */
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.tagline-text-content {
+  position: relative; /* Needed for pseudo-elements to be positioned correctly */
+  display: inline-block; /* Ensure pseudo-elements align with the text */
+}
+
+/* Glitch effect applies when .glitching is active on the parent div */
+.glitching .tagline-text-content::before,
+.glitching .tagline-text-content::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: hsl(var(--background)); /* Cover original text if needed */
+  overflow: hidden;
+  visibility: visible; /* Show when glitching */
+  text-shadow: none; /* Glitch fragments are sharp */
+}
+
+.glitching .tagline-text-content::before {
+  left: 2px; /* Increased offset */
+  color: hsl(var(--chart-1)); /* Neon Cyan */
+  animation: glitch-anim-1 0.15s infinite steps(2, jump-none) alternate; /* Slightly longer steps, more jitter */
+}
+
+.glitching .tagline-text-content::after {
+  left: -2px; /* Increased offset */
+  color: hsl(var(--chart-3)); /* Neon Green */
+  animation: glitch-anim-2 0.18s infinite steps(3, jump-none) alternate-reverse; /* Slightly longer steps, more jitter */
+}
+
+/* Keyframes for more intense glitch effects: more aggressive clips and displacements */
+@keyframes glitch-anim-1 {
+  0% { clip-path: inset(15% 0 70% 0); transform: translate(-2px, 1.5px) skewX(8deg); }
+  25% { clip-path: inset(80% 0 3% 0); transform: translate(1.5px, -1px) skewX(-6deg); }
+  50% { clip-path: inset(40% 0 45% 0); transform: translate(0.5px, 1px) skewX(4deg); }
+  75% { clip-path: inset(5% 0 90% 0); transform: translate(-1px, -0.5px) skewX(-7deg); }
+  100% { clip-path: inset(60% 0 10% 0); transform: translate(0px, 0px) skewX(0deg); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip-path: inset(65% 0 10% 0); transform: translate(2px, -1px) skewX(-7deg); }
+  25% { clip-path: inset(10% 0 80% 0); transform: translate(-1.5px, 1.5px) skewX(5deg); }
+  50% { clip-path: inset(35% 0 50% 0); transform: translate(-0.5px, -1px) skewX(-3deg); }
+  75% { clip-path: inset(75% 0 5% 0); transform: translate(1px, 0.5px) skewX(6deg); }
+  100% { clip-path: inset(20% 0 65% 0); transform: translate(0px, 0px) skewX(0deg); }
+}
+
+/* The parent div for the tagline will have text-glow-accent. */
+/* The .tagline-text-content span will inherit this. */
+/* Pseudo-elements for glitch will NOT inherit text-shadow due to 'text-shadow: none'. */
